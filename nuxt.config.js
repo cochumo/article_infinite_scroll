@@ -1,3 +1,5 @@
+import { client } from './utils/microcms'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -54,5 +56,25 @@ export default {
       apiKey: process.env.GET_API_KEY,
     },
     mode: process.env.NODE_ENV === 'production' ? 'server' : 'all',
+  },
+
+  generate: {
+    interval: 100,
+    routes() {
+      const limit = 10
+
+      return [...Array(limit).keys()].map((index) => {
+        return client
+          .get({
+            endpoint: 'post/bqwj4f59ec',
+          })
+          .then((res) => {
+            return {
+              route: `/${index + 1}`,
+              payload: { title: `${index + 1}番目のブログ記事`, post: res },
+            }
+          })
+      })
+    },
   },
 }
