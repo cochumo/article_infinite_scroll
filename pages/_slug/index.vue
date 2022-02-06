@@ -10,10 +10,13 @@ import { Context } from '@nuxt/types'
 
 export default Vue.extend({
   name: 'SlugPage',
-  async asyncData({ $microcms, _params }: Context & any): Promise<any> {
-    const post = await $microcms.get({
-      endpoint: `post/bqwj4f59ec`,
-    })
+  async asyncData({ $microcms, payload }: Context & any): Promise<any> {
+    const post =
+      payload !== undefined
+        ? payload.content
+        : await $microcms.get({
+            endpoint: `post/bqwj4f59ec`,
+          })
     return {
       post,
     }
