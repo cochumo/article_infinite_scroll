@@ -60,21 +60,28 @@ export default {
 
   generate: {
     interval: 100,
-    routes() {
-      const limit = 10
+    async routes() {
+      const limit = 100
 
-      return [...Array(limit).keys()].map((index) => {
-        return client
-          .get({
-            endpoint: 'post/bqwj4f59ec',
-          })
-          .then((res) => {
-            return {
-              route: `/${index + 1}`,
-              payload: { title: `${index + 1}番目のブログ記事`, post: res },
-            }
-          })
-      })
+      const posts = await Promise.all(
+        [...Array(limit).keys()].map((index) =>
+          client
+            .get({
+              endpoint: 'post/bqwj4f59ec',
+            })
+            .then((res) => {
+              return {
+                route: `/${index + 1}`,
+                payload: { title: `${index + 1}番目のブログ記事`, content: res },
+              }
+            })
+        )
+      );
+      const flattenPosts = [].concat.apply([], posts);
+
+      return [
+        ...flattenPosts
+      ]
     },
   },
 }
