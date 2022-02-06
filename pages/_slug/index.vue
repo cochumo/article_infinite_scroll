@@ -21,3 +21,9 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style scoped>
+::v-deep img {
+  max-width: 100%;
+}
+</style>
