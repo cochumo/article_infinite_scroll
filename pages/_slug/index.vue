@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Context } from '@nuxt/types';
+import { Context } from '@nuxt/types'
 
 export default Vue.extend({
   name: 'SlugPage',
@@ -18,6 +18,6 @@ export default Vue.extend({
     return {
       post,
     }
-  }
+  },
 })
 </script>
