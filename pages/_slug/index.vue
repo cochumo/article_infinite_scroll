@@ -19,7 +19,7 @@ export default Vue.extend({
             endpoint: `post/bqwj4f59ec`,
           })
     return {
-      title: payload.title || 'タイトルはありません',
+      title: payload?.title || 'タイトルはありません',
       post,
     }
   },
